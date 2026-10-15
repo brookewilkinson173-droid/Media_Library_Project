@@ -20,4 +20,23 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//test
+app.MapPost("/api/test-connection", (
+    TestMessage payload,
+    ILogger<Program> logger) =>
+{
+    logger.LogInformation(
+        "REACT CONNECTION TEST: {Message}",
+        payload.Message);
+
+    return Results.Ok(new
+    {
+        success = true,
+        message = payload.Message
+    });
+});
+
 app.Run();
+
+//test
+public record TestMessage(string Message);
