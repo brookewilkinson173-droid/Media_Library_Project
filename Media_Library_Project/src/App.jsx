@@ -2,59 +2,86 @@ import { useState } from 'react'
 import booksImg from './assets/books.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import microGif from './assets/micro.gif'
+import smartmicroGif from './assets/smartmicro.gif'
+import movieGif from './assets/movie.gif'
+import smartmovieGif from './assets/smartmovie.gif'
+import tvdoodleGif from './assets/tvdoodle.gif'
+import smarttvGif from './assets/smarttv.gif'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const [media, setMedia] = useState('Books')
+
+  const mediaImages = {
+    "All Media": booksImg,
+    Songs: smartmicroGif,
+    Shows: smarttvGif,
+    Movies: smartmovieGif,
+  }
   return (
     <>
       <section id="center">
         <div className="titlebar">
-          <img src={booksImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+          <img src={mediaImages[media]} className="base" width="170" height="179" alt="" />
         </div>
         <div>
-          <h1>Get started</h1>
+          <h1>Digital Library</h1>
           <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+            by zachary, brooke, and veronica
           </p>
         </div>
+
+  
         <button
-  type="button" //test
-  className="counter"
-  onClick={async () => {
-    const nextCount = count + 1
-    setCount(nextCount)
+          type="button" //test
+          className="counter"
+          onClick={async () => {
+            const nextCount = count + 1
+            setCount(nextCount)
 
-    try {
-      const response = await fetch('/api/test-connection', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `Hello from React! Count: ${nextCount}`,
-        }),
-      })
+            try {
+              const response = await fetch('/api/test-connection', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  message: `Hello from React! Count: ${nextCount}`,
+                }),
+              })
 
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`)
-      }
+              if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`)
+              }
 
-      const result = await response.json()
-      console.log('Backend response:', result)
-    } catch (error) {
-      console.error('Backend connection failed:', error)
-    }
-  }}
->
-  Count is {count} 
-</button> 
+              const result = await response.json()
+              console.log('Backend response:', result)
+            } catch (error) {
+              console.error('Backend connection failed:', error)
+            }
+          }}
+        >
+          Count is {count} 
+        </button> 
       </section>
 
-      <div className="ticks"></div>
+       
+        <div className = "searchbar">
+          <input type="text" placeholder="Search..." />
+          <select value={media}
+  onChange={(event) => setMedia(event.target.value)}>
+            <option value="All Media">All Media</option>
+            <option value="Songs">Songs</option>
+            <option value="Shows">Shows</option>
+            <option value="Movies">Movies</option>
+          </select>
+        </div>
+
+
+      <div className="div1"></div>
 
       <section id="next-steps">
         <div id="docs">
@@ -78,6 +105,9 @@ function App() {
             </li>
           </ul>
         </div>
+
+
+        {/*
         <div id="social">
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#social-icon"></use>
@@ -135,7 +165,9 @@ function App() {
             </li>
           </ul>
         </div>
+      */}
       </section>
+      
 
       <div className="ticks"></div>
       <section id="spacer"></section>
