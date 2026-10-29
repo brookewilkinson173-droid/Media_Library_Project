@@ -22,36 +22,12 @@ function App() {
           </p>
         </div>
         <button
-  type="button" //test
-  className="counter"
-  onClick={async () => {
-    const nextCount = count + 1
-    setCount(nextCount)
-
-    try {
-      const response = await fetch('/api/test-connection', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `Hello from React! Count: ${nextCount}`,
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`)
-      }
-
-      const result = await response.json()
-      console.log('Backend response:', result)
-    } catch (error) {
-      console.error('Backend connection failed:', error)
-    }
-  }}
->
-  Count is {count} 
-</button> 
+          type="button"
+          className="counter"
+          onClick={() => setCount((count) => count + 1)}
+        >
+          Count is {count}
+        </button>
       </section>
 
       <div className="ticks"></div>
