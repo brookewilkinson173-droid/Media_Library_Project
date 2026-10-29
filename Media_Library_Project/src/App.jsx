@@ -3,6 +3,7 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
+import MediaTypeDropdown from "./MediaTypeDropdown";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -46,14 +47,20 @@ function App() {
       const result = await response.json()
       console.log('Backend response:', result)
     } catch (error) {
-      console.error('Backend connection failed:', error)
+      console.error('Failed to fetch media types:', error); //test
+      setError(error.message);
+    } finally {
+    setLoading(false); //test
     }
   }}
 >
   Count is {count} 
 </button> 
       </section>
-
+      <div className="media-dropdown"> //test
+  <h2>Media Library</h2>
+  <MediaTypeDropdown />
+</div> //test
       <div className="ticks"></div>
 
       <section id="next-steps">
