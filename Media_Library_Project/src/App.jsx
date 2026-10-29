@@ -1,33 +1,32 @@
+
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
+import booksImg from './assets/books.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import smartmicroGif from './assets/smartmicro.gif'
+import smartmovieGif from './assets/smartmovie.gif'
+import smarttvGif from './assets/smarttv.gif'
 import './App.css'
-import MediaTypeDropdown from "./MediaTypeDropdown";
+import MediaTypeDropdown from './MediaTypeDropdown'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [media, setMedia] = useState('All Media')
+  const [loading, setLoading] = useState(false)
+  const [connectionError, setConnectionError] = useState('')
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-  type="button" //test
-  className="counter"
-  onClick={async () => {
+  const mediaImages = {
+    'All Media': booksImg,
+    Songs: smartmicroGif,
+    Shows: smarttvGif,
+    Movies: smartmovieGif,
+  }
+
+  const testConnection = async () => {
     const nextCount = count + 1
     setCount(nextCount)
+    setLoading(true)
+    setConnectionError('')
 
     try {
       const response = await fetch('/api/test-connection', {
@@ -47,97 +46,86 @@ function App() {
       const result = await response.json()
       console.log('Backend response:', result)
     } catch (error) {
-      console.error('Failed to fetch media types:', error); //test
-      setError(error.message);
+      console.error('Backend connection failed:', error)
+      setConnectionError(error.message || 'Connection failed')
     } finally {
-    setLoading(false); //test
+      setLoading(false)
     }
-  }}
->
-  Count is {count} 
-</button> 
+  }
+
+  return (
+    <>
+      <section id="center">
+        <div className="titlebar">
+          <img
+            src={mediaImages[media]}
+            className="base"
+            width="170"
+            height="179"
+            alt=""
+          />
+        </div>
+
+        <div>
+          <h1>Digital Library</h1>
+          <p>by zachary, brooke, and veronica</p>
+        </div>
+
+        <button
+          type="button"
+          className="counter"
+          onClick={testConnection}
+          disabled={loading}
+        >
+          {loading ? 'Testing connection...' : `Count is ${count}`}
+        </button>
+
+        {connectionError && (
+          <p role="alert">{connectionError}</p>
+        )}
       </section>
-      <div className="media-dropdown"> //test
-  <h2>Media Library</h2>
-  <MediaTypeDropdown />
-</div> //test
-      <div className="ticks"></div>
+
+      <div className="searchbar">
+        <input type="text" placeholder="Search..." />
+
+        <select
+          value={media}
+          onChange={(event) => setMedia(event.target.value)}
+        >
+          <option value="All Media">All Media</option>
+          <option value="Songs">Songs</option>
+          <option value="Shows">Shows</option>
+          <option value="Movies">Movies</option>
+        </select>
+      </div>
+
+      <div className="media-dropdown">
+        <h2>Media Library</h2>
+        <MediaTypeDropdown />
+      </div>
+
+      <div className="div1"></div>
 
       <section id="next-steps">
         <div id="docs">
           <svg className="icon" role="presentation" aria-hidden="true">
             <use href="/icons.svg#documentation-icon"></use>
           </svg>
+
           <h2>Documentation</h2>
           <p>Your questions, answered</p>
+
           <ul>
             <li>
-              <a href="https://vite.dev/" target="_blank">
+              <a href="https://vite.dev/" target="_blank" rel="noreferrer">
                 <img className="logo" src={viteLogo} alt="" />
                 Explore Vite
               </a>
             </li>
             <li>
-              <a href="https://react.dev/" target="_blank">
+              <a href="https://react.dev/" target="_blank" rel="noreferrer">
                 <img className="button-icon" src={reactLogo} alt="" />
                 Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
               </a>
             </li>
           </ul>
