@@ -23,7 +23,7 @@ dotnet run
 
 The backend currently runs locally at:
 
-\`https://localhost:7061\`
+`https://localhost:7061`
 
 ### Frontend
 
