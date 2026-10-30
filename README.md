@@ -17,8 +17,7 @@ The frontend and backend run independently and require separate terminals.
 Navigate to the ASP.NET backend project directory and run:
 
 ```bash
-dotnet restore
-dotnet run
+dotnet run --launch-profile https
 ```
 
 The backend currently runs locally at:
