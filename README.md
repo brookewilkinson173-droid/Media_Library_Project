@@ -16,10 +16,10 @@ The frontend and backend run independently and require separate terminals.
 
 Navigate to the ASP.NET backend project directory and run:
 
-\`\`\`bash
+```bash
 dotnet restore
 dotnet run
-\`\`\`
+```
 
 The backend currently runs locally at:
 
@@ -29,14 +29,14 @@ The backend currently runs locally at:
 
 Navigate to the React frontend directory containing \`package.json\` and run:
 
-\`\`\`bash
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
 The frontend should be available at:
 
-\`http://localhost:5173\`
+`http://localhost:5173`
 
 ### Development Notes
 
@@ -44,16 +44,16 @@ The frontend should be available at:
 - ASP.NET CORS is configured to allow requests from the local Vite development server.
 - The ASP.NET HTTPS development certificate may need to be trusted locally:
 
-\`\`\`bash
+```bash
 dotnet dev-certs https --trust
-\`\`\`
+```
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | \`/api/media-attributes/media-types\` | Retrieves available media categories. |
-| POST | \`/api/test-connection\` | Tests communication between React and ASP.NET. |
+| GET | `/api/media-attributes/media-types` | Retrieves available media categories. |
+| POST | `api/test-connection` | Tests communication between React and ASP.NET. |
 
 ## Future Development
 
