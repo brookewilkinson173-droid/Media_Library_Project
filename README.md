@@ -29,7 +29,6 @@ The backend currently runs locally at:
 Navigate to the React frontend directory containing \`package.json\` and run:
 
 ```bash
-npm install
 npm run dev
 ```
 
