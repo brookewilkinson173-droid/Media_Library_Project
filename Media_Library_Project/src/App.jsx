@@ -68,7 +68,7 @@ function App() {
 
         <div>
           <h1>Digital Library</h1>
-          <p>by zachary, brooke, and veronica</p>
+          <p>by Zachary, Brooke, and Veronica</p>
         </div>
 
         <button
