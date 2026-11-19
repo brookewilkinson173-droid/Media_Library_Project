@@ -5,6 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+//Potentially move to .json file, configuration management
+builder.Services.AddHttpClient<WikiDataService>(client =>
+{
+    client.BaseAddress = new Uri("https://www.wikidata.org/wiki/Special:EntityData/");
+    client.DefaultRequestHeaders.UserAgent.ParseAdd("DigitalLibrary/1.0 (zacpal8@gmail.com)");
+});
 
 //CORS?
 builder.Services.AddCors(options =>
@@ -33,7 +39,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
 
 
 //test
