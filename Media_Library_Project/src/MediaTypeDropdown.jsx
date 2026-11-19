@@ -7,9 +7,10 @@ const mediaTypeLabels = {
   Movie: "Movies",
   TVShow: "Shows",
 };
+const fallbackMediaTypes = ["Book", "Song", "Movie", "TVShow"];
 
 function MediaTypeDropdown({ value, onChange }) {
-  const [mediaTypes, setMediaTypes] = useState([]);
+  const [mediaTypes, setMediaTypes] = useState(fallbackMediaTypes);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -44,7 +45,6 @@ function MediaTypeDropdown({ value, onChange }) {
         aria-label="Filter by media type"
         value={value}
         onChange={onChange}
-        disabled={loading || Boolean(error)}
       >
         <option value="All Media">All Media</option>
 
