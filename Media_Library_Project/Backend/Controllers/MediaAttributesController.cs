@@ -19,8 +19,6 @@ public class MediaAttributesController : ControllerBase
     public ActionResult<IReadOnlyList<MediaAttribute>>
         GetAttributes(Medium medium)
     {
-        var attributes = MediaAttributeDefinitions.GetAttributes(medium);
-
-        return Ok(attributes);
+        return Ok(MediaAttributeDefinitions.GetAttributes(medium));
     }
 }
