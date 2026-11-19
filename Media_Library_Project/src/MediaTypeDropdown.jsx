@@ -10,7 +10,9 @@ function MediaTypeDropdown() {
   useEffect(() => {
     async function fetchMediaTypes() {
       try {
-        const response = await fetch("/api/media-attributes/media-types");
+        const response = await fetch(
+          "https://localhost:7061/api/media-attributes/media-types" //changed from 7001s
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status}`);
