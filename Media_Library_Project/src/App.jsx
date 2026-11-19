@@ -17,9 +17,10 @@ function App() {
 
   const mediaImages = {
     'All Media': booksImg,
-    Songs: smartmicroGif,
-    Shows: smarttvGif,
-    Movies: smartmovieGif,
+    Book: booksImg,
+    Song: smartmicroGif,
+    TVShow: smarttvGif,
+    Movie: smartmovieGif,
   }
 
   const testConnection = async () => {
@@ -87,21 +88,13 @@ function App() {
 
       <div className="searchbar">
         <input type="text" placeholder="Search..." />
-
-        <select
+        <MediaTypeDropdown
           value={media}
           onChange={(event) => setMedia(event.target.value)}
-        >
-          <option value="All Media">All Media</option>
-          <option value="Songs">Songs</option>
-          <option value="Shows">Shows</option>
-          <option value="Movies">Movies</option>
-        </select>
+        />
       </div>
 
       <div className="media-dropdown">
-        <h2>Media Library</h2>
-        <MediaTypeDropdown />
       </div>
 
       <div className="div1"></div>
